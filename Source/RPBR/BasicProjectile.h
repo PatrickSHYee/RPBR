@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/SphereComponent.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 #include "BasicProjectile.generated.h"
 
 UCLASS()
@@ -23,4 +25,14 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	// Sphere collision component
+	UPROPERTY(VisibleDefaultsOnly, Category = Projectile)
+	USphereComponent* CollisionComponent;
+
+	// Projectile movement component
+	UPROPERTY(VisibleAnywhere, Category = Movement)
+	UProjectileMovementComponent* ProjMoveComponent;
+
+	// Initializes the projectile's velocity in the shoot direction
+	void FireInDirection(const FVector& direction);
 };
