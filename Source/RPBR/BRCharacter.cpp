@@ -24,6 +24,18 @@ ABRCharacter::ABRCharacter()
 	FPSCameraComponent->SetupAttachment(CastChecked<USceneComponent, UCapsuleComponent>(GetCapsuleComponent()));	// Attach the camera component to our capsule component
 	FPSCameraComponent->SetRelativeLocation(FVector(0.0f, 0.0f, 50.0f + BaseEyeHeight));							// Position the camera slightly above the eyes
 	FPSCameraComponent->bUsePawnControlRotation = true;																// Enable the pawn to control the camera rotation
+
+	// Create the first person mesh component for the playing player
+	FPSMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("FirstPersonMesh"));
+	check(FPSMesh != nullptr);
+
+	FPSMesh->SetOnlyOwnerSee(true);																					// Only the player sees this mesh
+	FPSMesh->SetupAttachment(FPSCameraComponent);																	// Attach the FPS mesh to the FPS Camera
+	FPSMesh->bCastDynamicShadow = false;																			// Disable envirnmental shadows of the first person mesh
+	FPSMesh->CastShadow = false;
+
+	// The player doesn't see the regular third-person body mesh
+	GetMesh()->SetOwnerNoSee(true);
 }
 
 // Called when the game starts or when spawned

@@ -40,6 +40,10 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	UCameraComponent* FPSCameraComponent;
 
+	// First-person mesh (arms) - Visible only the playing player
+	UPROPERTY(VisibleDefaultsOnly, Category = Mesh)
+	USkeletalMeshComponent* FPSMesh;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
