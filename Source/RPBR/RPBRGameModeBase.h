@@ -13,5 +13,9 @@ UCLASS()
 class RPBR_API ARPBRGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
+
+public:
+	ARPBRGameModeBase();
+	virtual void StartPlay() override;
 	
 };
